@@ -1,0 +1,38 @@
+CREATE TABLE buses (
+  `id` INTEGER,
+  `origin` VARCHAR(6),
+  `destination` VARCHAR(6),
+  `time` VARCHAR(5)
+);
+
+INSERT INTO buses
+  (`id`, `origin`, `destination`, `time`)
+VALUES
+  ('10', 'Warsaw', 'Berlin', '10:55'),
+  ('20', 'Berlin', 'Paris', '06:20'),
+  ('21', 'Berlin', 'Paris', '14:00'),
+  ('22', 'Berlin', 'Paris', '21:40'),
+  ('30', 'Paris', 'Madrid', '13:30');
+
+CREATE TABLE passengers (
+  `id` INTEGER,
+  `origin` VARCHAR(6),
+  `destination` VARCHAR(6),
+  `time` VARCHAR(5)
+);
+
+INSERT INTO passengers
+  (`id`, `origin`, `destination`, `time`)
+VALUES
+  ('1', 'Paris', 'Madrid', '13:30'),
+  ('2', 'Paris', 'Madrid', '13:31'),
+  ('10', 'Warsaw', 'Paris', '10:00'),
+  ('11', 'Warsaw', 'Berlin', '22:31'),
+  ('40', 'Berlin', 'Paris', '06:15'),
+  ('41', 'Berlin', 'Paris', '06:50'),
+  ('42', 'Berlin', 'Paris', '07:12'),
+  ('43', 'Berlin', 'Paris', '12:03'),
+  ('44', 'Berlin', 'Paris', '20:00');
+
+select b.id, COUNT(CASE WHEN Datetime(b.time) <= Datetime(p.time) THEN 1 else null END)
+from buses as b left join passengers as p on p.origin = b.origin AND p.destination = b.destination group by b.id ORDER BY b.id;

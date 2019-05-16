@@ -1,0 +1,36 @@
+CREATE TABLE test_groups (
+  `name` VARCHAR(19),
+  `test_value` INTEGER
+);
+
+INSERT INTO test_groups
+  (`name`, `test_value`)
+VALUES
+  ('performance', '15'),
+  ('corner cases', '10'),
+  ('numerical stability', '20'),
+  ('memory usage', '10');
+
+
+
+CREATE TABLE test_cases (
+  `id` INTEGER,
+  `group_name` VARCHAR(19),
+  `status` VARCHAR(5)
+);
+
+INSERT INTO test_cases
+  (`id`, `group_name`, `status`)
+VALUES
+  ('13', 'memory usage', 'OK'),
+  ('14', 'numerical stability', 'OK'),
+  ('15', 'memory usage', 'ERROR'),
+  ('16', 'numerical stability', 'OK'),
+  ('17', 'numerical stability', 'OK'),
+  ('18', 'performance', 'ERROR'),
+  ('19', 'performance', 'ERROR'),
+  ('20', 'memory usage', 'OK'),
+  ('21', 'numerical stability', 'OK');
+  
+
+select test_groups.name, COUNT(test_cases.id) as all_test_cases, COUNT(CASE test_cases.status WHEN 'OK' THEN 1 ELSE null END) as passed_test_cases, COUNT(CASE test_cases.status WHEN 'OK' THEN 1 ELSE null END) * test_groups.test_value as total_value from test_groups left join test_cases on test_cases.group_name = test_groups.name group by test_groups.name ORDER BY total_value DESC, test_groups.name;
