@@ -12,3 +12,5 @@
       getRankOfNumber(3) = 1
       getRankOfNumber(4) 3
 ```
+
+4. merge_sorted.py : Merge two sorted arrays in place. The 1st array has extra space for accomodating the 2nd array.
