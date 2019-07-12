@@ -14,3 +14,5 @@
 ```
 
 4. merge_sorted.py : Merge two sorted arrays in place. The 1st array has extra space for accomodating the 2nd array.
+
+5. rotated_binsearch.py : An element in a sorted array can be found in O(log n) time via binary search. But suppose we rotate an ascending order sorted array at some pivot unknown to you beforehand. So for instance, 1 2 3 4 5 might become 3 4 5 1 2. Devise a way to find an element in the rotated array in O(log n) time.
